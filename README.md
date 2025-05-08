@@ -39,19 +39,19 @@ Create a `.env.local` file in the root and add:
 MONGODB_URI=mongodb://localhost:27017/
 ```
 
-4. Start the backend server:
+4. Start the backend server (needs to be executed from the root folder):
 ```bash
 node backend/server.js
 ```
 
-5. Start the frontend (Next.js):
+5. Start the frontend (Next.js): (make sure your pwd is ../frontend/ and running it in a new terminal) 
 ```bash
 npm run dev
 ```
 
-6. Seed the database (optional for testing):
+6. Seed the database (optional for testing, needs to be executed from root folder and running it in a new terminal):
 ```bash
-node backend/seed.js
+node scripts/seed.js
 ```
 
 ---
