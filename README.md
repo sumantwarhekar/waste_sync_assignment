@@ -6,7 +6,7 @@ This is a full-stack product search platform built with **Next.js**, **Express**
 
 ## Setup & Running Instructions
 
-### 📦 Prerequisites
+### 📦 Prerequisites & Dependencies
 - Node.js v18+
 - MongoDB running locally (`mongodb://localhost:27017/`)
 - Git
