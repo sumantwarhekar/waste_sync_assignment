@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Waste Sync - Optimized Product Search App
 
-## Getting Started
+This is a full-stack product search platform built with **Next.js**, **Express**, and **MongoDB**. It demonstrates optimized querying, efficient pagination, and basic system architecture for scalable e-commerce product search.
 
-First, run the development server:
+---
 
+## Setup & Running Instructions
+
+### 📦 Prerequisites
+- Node.js v18+
+- MongoDB running locally (`mongodb://localhost:27017/`)
+- Git
+
+### Installation
+
+1. Clone the repo:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/sumantwarhekar/waste_sync_assignment.git
+cd waste_sync_assignment
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. Set environment variables:
+Create a `.env.local` file in the root and add:
+```
+MONGODB_URI=mongodb://localhost:27017/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start the backend server:
+```bash
+node backend/server.js
+```
 
-## Learn More
+5. Start the frontend (Next.js):
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. Seed the database (optional for testing):
+```bash
+node backend/seed.js
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How It Works
 
-## Deploy on Vercel
+This project implements a product search API and frontend for an e-commerce-like setup:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Frontend (Next.js)
+- `/`: Home with a "Products" button
+- `/products`: Lists all products with pagination
+- `/search`: Allows search by category, tenant, or both with pagination support
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Backend (Express + MongoDB)
+- **`GET /api/products/search`**
+  - Params: `category`, `tenant`, `page`, `limit`
+  - Returns paginated product list
+- **`POST /api/products/add`**
+  - Adds a new product (validated input)
+- **`DELETE /api/products/remove?id=`**
+  - Removes product by Mongo `_id`
+
+---
+
+## Performance & Optimization Notes
+
+- **Indexes on category and tenant** help optimize MongoDB queries.
+- Pagination handled using `.skip()` and `.limit()` in MongoDB.
+- Validations for all endpoints using `express-validator`.
+
+---
+
+## System Architecture
+
+```mermaid
+graph TD
+  UI[User Interface (Next.js)] --> API[Express.js API Server]
+  API --> DB[(MongoDB)]
+```
+
+---
+
+## Scalability Opportunities
+
+- **Database Scaling**: Use MongoDB replication/sharding or Atlas.
+- **Backend Scaling**: Deploy Express via Docker, use load balancing.
+- **Caching**: Add Redis for repeated queries.
+- **Search Engine**: Integrate MongoDB Atlas Search / Elasticsearch for fuzzy & advanced queries.
+
+---
+
+## 📄 License
+
+MIT © Sumant Warhekar
