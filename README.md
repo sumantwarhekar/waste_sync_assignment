@@ -10,6 +10,15 @@ This is a full-stack product search platform built with **Next.js**, **Express**
 - Node.js v18+
 - MongoDB running locally (`mongodb://localhost:27017/`)
 - Git
+- faker-js/faker (for seeding the database)
+-  axios
+- cors
+- dotenv
+- express
+- express-validator
+- next
+- react
+- react-dom 
 
 ### Installation
 
@@ -69,7 +78,7 @@ This project implements a product search API and frontend for an e-commerce-like
 
 ## Performance & Optimization Notes
 
-- **Indexes on category and tenant** help optimize MongoDB queries.
+- Indexes on category and tenant help optimize MongoDB queries.
 - Pagination handled using `.skip()` and `.limit()` in MongoDB.
 - Validations for all endpoints using `express-validator`.
 
@@ -77,20 +86,37 @@ This project implements a product search API and frontend for an e-commerce-like
 
 ## System Architecture
 
-```mermaid
-graph TD
-  UI[User Interface (Next.js)] --> API[Express.js API Server]
-  API --> DB[(MongoDB)]
-```
+It can be broken down three different sections:
+1. Frontend (Client Layer)
+- Built using Next.js (React framework).
+- Handles user input and renders product search and result views.
+- Makes API requests to the backend using fetch.
+
+2. Backend (API Layer)
+- Built with Express.js.
+- Exposes RESTful endpoints to support:
+- Product search with optional filters (category, tenant)
+- Product addition and deletion
+- Pagination support
+- Performs input validation using express-validator.
+
+3. Database (Data Layer)
+- Uses MongoDB as the database.
+- Stores product documents in a products collection.
+- Implements indexing on category and tenant fields to optimize search queries.
+- Supports efficient skip() and limit() operations for paginated queries.
 
 ---
 
 ## Scalability Opportunities
 
-- **Database Scaling**: Use MongoDB replication/sharding or Atlas.
-- **Backend Scaling**: Deploy Express via Docker, use load balancing.
-- **Caching**: Add Redis for repeated queries.
-- **Search Engine**: Integrate MongoDB Atlas Search / Elasticsearch for fuzzy & advanced queries.
+The system now functions well for light use, but there are clear methods to scale it larger. On the database side of things, the capability to enable MongoDB replication will increase availability through data replication across nodes. For handling lots of data, sharding on something such as tenant or category would divide the load nice and evenly across machines.
+
+The backend is stateless, which makes horizontal scaling easy. Multiple instances of the Express server can be run behind a load balancer like NGINX or AWS ELB to handle higher traffic. This would be a suitable setup in a containerized environment with Docker or a process manager like PM2.
+
+It can also boost performance. Adding Redis to store often queried terms in a cache would reduce database queries. In the frontend, static content may be cached with a CDN to speed up response and lower server load.
+
+If search complexity rises, the addition of a specialist engine like Elasticsearch or MongoDB Atlas Search would add support for autocomplete, fuzzy matching, and advanced filtering all of which are beyond the capabilities of simple MongoDB queries.
 
 ---
 
