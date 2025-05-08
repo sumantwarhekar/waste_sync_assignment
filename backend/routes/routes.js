@@ -10,7 +10,7 @@ const { query, body, validationResult } = require('express-validator');
 const router = express.Router();
 
 //
-// 🔒 Validation Middleware
+// Validation Middleware
 //
 const validateSearchParams = [
   query('category').optional().isString().withMessage('Category must be a string'),
@@ -20,7 +20,7 @@ const validateSearchParams = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.warn('❌ Validation failed (search params)', errors.array());
+      console.warn('Validation failed (search params)', errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
     next();
@@ -36,7 +36,7 @@ const validateAddProduct = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.warn('❌ Validation failed (add product)', errors.array());
+      console.warn('Validation failed (add product)', errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
     next();
@@ -48,7 +48,7 @@ const validateRemoveProduct = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.warn('❌ Validation failed (remove product)', errors.array());
+      console.warn('Validation failed (remove product)', errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
     next();
@@ -56,7 +56,7 @@ const validateRemoveProduct = [
 ];
 
 //
-// 🚀 Routes
+// Routes
 //
 
 // GET /api/products/search
@@ -105,7 +105,7 @@ router.post('/add', validateAddProduct, async (req, res) => {
       product: newProduct,
     });
   } catch (err) {
-    console.error('🔥 Failed to add product:', err);
+    console.error('Failed to add product:', err);
     return res.status(500).json({ error: 'Failed to add product' });
   }
 });
@@ -123,7 +123,7 @@ router.delete('/remove', validateRemoveProduct, async (req, res) => {
 
     return res.status(200).json({ message: 'Product removed successfully' });
   } catch (err) {
-    console.error('🔥 Failed to remove product:', err);
+    console.error('Failed to remove product:', err);
     return res.status(500).json({ error: 'Failed to remove product' });
   }
 });

@@ -1,12 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const { connectDB } = require('./config/database'); // Import the database connection
-const productRoutes = require('./routes/routes'); // Import product routes
+const { connectDB } = require('./config/database'); // Import database connection
+const productRoutes = require('./routes/routes'); // Import routes
 
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
 app.use(express.json()); // Parse JSON bodies
 
 // Connect to MongoDB

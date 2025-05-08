@@ -10,7 +10,7 @@ const tenants = ['amazon', 'walmart', 'target', 'bestbuy', 'flipkart'];
 async function seed() {
   try {
     await client.connect();
-    const db = client.db('waste_sync'); // replace with your actual DB name
+    const db = client.db('waste_sync'); // DB name
     const collection = db.collection('products');
 
     // Optional: Clear existing data

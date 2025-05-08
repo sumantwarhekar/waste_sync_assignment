@@ -23,7 +23,7 @@ export default function ProductsPage() {
           return;
         }
 
-        console.log('Fetched data:', data);
+        //console.log('Fetched data:', data);
         setProducts(data.products || []);
         setTotal(data.total || 0);
       } catch (err) {

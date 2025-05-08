@@ -77,7 +77,7 @@ export default function SearchPage() {
         setProducts(data.products || []);
         setTotal(data.total || 0);
       } catch (err) {
-        console.error('❌ Error fetching products:', err);
+        console.error('Error fetching products:', err);
         setProducts([]);
         setTotal(0);
       }

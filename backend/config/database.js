@@ -8,7 +8,7 @@ let db;
 
 const connectDB = async () => {
   try {
-    const client = new MongoClient(uri); // Updated for driver v4+
+    const client = new MongoClient(uri);
     await client.connect();
     db = client.db(dbName);
     console.log('MongoDB connected successfully!');
