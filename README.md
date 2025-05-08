@@ -44,8 +44,9 @@ MONGODB_URI=mongodb://localhost:27017/
 node backend/server.js
 ```
 
-5. Start the frontend (Next.js): (make sure your pwd is ../frontend/ and running it in a new terminal) 
+5. Start the frontend (Next.js): (run it in a new terminal) 
 ```bash
+cd frontend
 npm run dev
 ```
 
